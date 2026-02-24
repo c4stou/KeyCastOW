@@ -1,1 +1,25 @@
-msbuild /p:platform=win32 /p:Configuration=Release
+name: Build KeyCastOW
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build Win32 Release
+      run: msbuild keycastow.vcxproj /m /p:Platform=Win32 /p:Configuration=Release
+
+    - name: Upload exe
+      uses: actions/upload-artifact@v4
+      with:
+        name: KeyCastOW-Win32-Release
+        path: Release/keycastow.exe
