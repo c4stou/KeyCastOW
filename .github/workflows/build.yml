@@ -12,10 +12,10 @@ jobs:
 
     - uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Build
-      run: msbuild keycastow.vcxproj /p:Configuration=Release /p:Platform=x64
+    - name: Build Win32
+      run: msbuild keycastow.vcxproj /p:Configuration=Release /p:Platform=Win32
 
     - uses: actions/upload-artifact@v4
       with:
         name: KeyCastOW
-        path: x64/Release/keycastow.exe
+        path: Release/keycastow.exe
